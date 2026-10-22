@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <nav className="text-sm text-ink/50 mb-6">
         <Link href="/" className="hover:text-forest">Home</Link> / <Link href="/shop" className="hover:text-forest">Shop</Link> / <span>{p.name}</span>
       </nav>
@@ -52,17 +52,10 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
           <h1 className="text-4xl font-serif text-forest">{p.name}</h1>
           <p className="mt-3 text-2xl text-saffron font-semibold">₹{p.price}</p>
           <p className="mt-6 text-ink/70 leading-relaxed">{p.description}</p>
-          <button className="mt-8 bg-forest text-white px-8 py-3 rounded-full hover:bg-saffron transition">
-            Add to Cart
-          </button>
+          <p className="mt-8 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900">ऑनलाइन ऑर्डर और भुगतान अभी सक्रिय नहीं हैं। खरीदारी उपलब्ध होने से पहले उत्पाद की कीमत, स्टॉक, लाइसेंस/लेबल, शिपिंग और रिटर्न नीति सत्यापित की जाएगी।</p>
           <div className="mt-10 border-t border-forest/10 pt-6">
             <h2 className="text-lg font-serif text-forest mb-3">Benefits</h2>
-            <ul className="space-y-2 text-sm text-ink/70">
-              <li>• 100% natural Ayurvedic ingredients</li>
-              <li>• Traditionally prepared at Yog Maya Ashram</li>
-              <li>• No artificial additives or preservatives</li>
-              <li>• Free shipping across India</li>
-            </ul>
+            <p className="text-sm leading-relaxed text-ink/70">Final ingredients, directions, cautions, manufacturer details, applicable licence information, stock, shipping fees and return terms must be verified from the actual product label and fulfilment policy before online sales are enabled.</p>
           </div>
         </div>
       </div>

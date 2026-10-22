@@ -12,35 +12,35 @@ export const PRODUCTS: Product[] = [
     product: "ashwagandha-capsules",
     name: "Ashwagandha Capsules",
     price: 349,
-    description: "Pure Ashwagandha root capsules to relieve joint pain, reduce inflammation, and restore mobility. Traditionally prepared at Yog Maya Ashram.",
+    description: "Ashwagandha root capsule product listing. Confirm ingredients, approved label, directions, safety information and applicable licensing before publication.",
   },
   {
     category: "joint-pain",
     product: "joint-relief-oil",
     name: "Joint Relief Oil",
     price: 249,
-    description: "Ayurvedic joint pain relief oil with Mahanarayan and Dhanwantharam blend. For external use, deep penetrating warmth.",
+    description: "Traditional-use oil product listing. Confirm the actual ingredients, intended use, cautions and approved label before publication.",
   },
   {
     category: "immunity",
     product: "chyawanprash",
     name: "Chyawanprash",
     price: 499,
-    description: "Traditional Chyawanprash made with 40+ herbs, Amla, and pure cow ghee. Boosts immunity and vitality.",
+    description: "Chyawanprash product listing. Confirm the actual ingredient list, allergens, label claims and storage instructions before publication.",
   },
   {
     category: "immunity",
     product: "immunity-kadha",
     name: "Immunity Kadha Mix",
     price: 199,
-    description: "Ready-to-brew Ayurvedic kadha mix with tulsi, ginger, black pepper, and cinnamon. Natural immunity booster.",
+    description: "Kadha mix product listing. Confirm the actual ingredients, preparation instructions and permitted label claims before publication.",
   },
   {
     category: "digestion",
     product: "triphala-powder",
     name: "Triphala Powder",
     price: 179,
-    description: "Classical Triphala blend for digestion, gut health, and gentle detoxification.",
+    description: "Triphala powder product listing. Confirm the actual ingredients, usage directions, cautions and permitted label claims before publication.",
   },
 ];
 
@@ -50,16 +50,16 @@ export const PROBLEMS: Problem[] = [
   {
     slug: "joint-pain",
     label: "Joint Pain",
-    description: "Ayurveda approaches joint pain through anti-inflammatory herbs, oil therapy, and internal purification. Our curated remedies combine centuries-old wisdom with pure ingredients.",
+    description: "This educational category is not medical advice. Product details and any health-related claims must be checked against approved product labels and applicable rules before publication.",
   },
   {
     slug: "immunity",
     label: "Low Immunity",
-    description: "Recurrent colds, fatigue, and slow recovery often signal weak immunity (vyadhikshamatva). Ayurvedic rasayanas rebuild your body's natural defenses.",
+    description: "This educational category is not medical advice. Persistent symptoms should be discussed with a qualified healthcare professional; product claims must be verified before publication.",
   },
   {
     slug: "digestion",
     label: "Digestion Issues",
-    description: "Ayurveda treats the gut as the root of health. Herbs like Triphala and Trikatu restore agni (digestive fire) and eliminate ama (toxins).",
+    description: "This educational category is not medical advice. Product claims about digestion or detoxification must be substantiated and approved before publication.",
   },
 ];

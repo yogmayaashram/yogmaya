@@ -1,0 +1,26 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { signOutAction } from "@/app/auth/actions";
+const labels: Record<string,string> = { super_admin:"मुख्य एडमिन", trustee:"ट्रस्टी / पदाधिकारी", membership_manager:"सदस्यता प्रबंधक", finance_manager:"वित्त प्रबंधक", puja_manager:"पूजा प्रबंधक", public_member:"सामान्य सदस्य" };
+export default async function DashboardPage() {
+ const supabase = await createSupabaseServerClient();
+ if (!supabase) return <SetupNotice />;
+ const { data: { user } } = await supabase.auth.getUser();
+ if (!user) redirect("/auth/login");
+ const { data: profile } = await supabase.from("profiles").select("full_name,app_role,account_status,phone").eq("id",user.id).maybeSingle();
+ if (profile?.account_status === "suspended") return <main className="p-10">आपका अकाउंट अस्थायी रूप से निलंबित है। कृपया ट्रस्ट से संपर्क करें।</main>;
+ const [{data: memberships},{data: bookings},{data: applications}] = await Promise.all([
+  supabase.from("memberships").select("id,membership_number,plan_code,status,starts_at,expires_at,created_at").eq("user_id",user.id).order("created_at",{ascending:false}).limit(5),
+  supabase.from("bookings").select("id,service_name,starts_at,booking_status,meeting_provider,meeting_url,payment_status").eq("user_id",user.id).order("starts_at",{ascending:false}).limit(5),
+  supabase.from("trustee_applications").select("id,review_status,payment_status,created_at").eq("user_id",user.id).order("created_at",{ascending:false}).limit(3),
+ ]);
+ const staff = profile?.app_role && profile.app_role !== "public_member";
+ return <main className="min-h-screen bg-cream px-4 py-8 md:px-8"><div className="mx-auto max-w-6xl"><header className="flex flex-wrap items-center justify-between gap-4"><div><p className="text-sm font-semibold tracking-widest text-saffron">YOG MAYA MEMBER PORTAL</p><h1 className="mt-2 text-4xl text-maroon">नमस्ते, {profile?.full_name || user.email}</h1><p className="mt-2 text-sm text-ink/60">{labels[profile?.app_role || "public_member"]} · अकाउंट {profile?.account_status || "active"}</p></div><form action={signOutAction}><button className="rounded-full border border-maroon/20 px-5 py-2 text-maroon">लॉगआउट</button></form></header>
+ <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"><PortalCard href="/membership/apply" title="सामान्य सदस्यता" desc="सदस्यता आवेदन और स्थिति"/><PortalCard href="/booking" title="पूजा / अपॉइंटमेंट" desc="नई बुकिंग अनुरोध भेजें"/><PortalCard href="/live" title="लाइव आरती" desc="सार्वजनिक लाइव कार्यक्रम देखें"/><PortalCard href="/admin" title="स्टाफ पोर्टल" desc={staff?"आपकी भूमिका के अनुसार प्रशासन":"केवल अधिकृत स्टाफ के लिए"}/></div>
+ <section className="mt-8 grid gap-6 lg:grid-cols-3"><DataCard title="मेरी सदस्यताएँ" empty="अभी कोई सदस्यता रिकॉर्ड नहीं है।">{(memberships||[]).map((m:any)=><div key={m.id} className="border-b py-3 last:border-0"><p className="font-semibold">{m.membership_number || m.plan_code}</p><p className="text-sm text-ink/60">स्थिति: {m.status}</p></div>)}</DataCard><DataCard title="मेरी बुकिंग" empty="अभी कोई बुकिंग नहीं है।">{(bookings||[]).map((b:any)=><div key={b.id} className="border-b py-3 last:border-0"><p className="font-semibold">{b.service_name}</p><p className="text-sm text-ink/60">{new Date(b.starts_at).toLocaleString("hi-IN",{timeZone:"Asia/Kolkata"})} · {b.booking_status}</p>{b.meeting_url && <a className="text-sm text-maroon underline" href={b.meeting_url} rel="noreferrer">मीटिंग लिंक</a>}</div>)}</DataCard><DataCard title="मुख्य ट्रस्ट आवेदन" empty="अभी कोई आवेदन नहीं है।">{(applications||[]).map((a:any)=><div key={a.id} className="border-b py-3 last:border-0"><p className="font-semibold">आवेदन #{a.id.slice(0,8)}</p><p className="text-sm text-ink/60">समीक्षा: {a.review_status} · भुगतान: {a.payment_status}</p></div>)}</DataCard></section>
+ <p className="mt-8 text-xs leading-relaxed text-ink/50">भुगतान की स्थिति केवल सत्यापित पेमेंट गेटवे से अपडेट होनी चाहिए। इस संस्करण में वास्तविक भुगतान गेटवे और Meet/Zoom ऑटोमेशन कॉन्फ़िगर करना बाकी है।</p></div></main>;
+}
+function PortalCard({href,title,desc}:{href:string;title:string;desc:string}){return <Link href={href} className="rounded-2xl border border-maroon/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><h2 className="text-xl text-maroon">{title}</h2><p className="mt-2 text-sm text-ink/60">{desc}</p></Link>}
+function DataCard({title,empty,children}:{title:string;empty:string;children:React.ReactNode}){const isEmpty=children==null||(Array.isArray(children)&&children.length===0);return <section className="rounded-2xl border border-maroon/10 bg-white p-5"><h2 className="text-xl text-maroon">{title}</h2><div className="mt-3">{isEmpty?<p className="text-sm text-ink/50">{empty}</p>:children}</div></section>}
+function SetupNotice(){return <main className="min-h-screen bg-cream p-8"><div className="mx-auto max-w-2xl rounded-2xl bg-white p-8"><h1 className="text-3xl text-maroon">Supabase सेटअप बाकी है</h1><p className="mt-3">`.env.local` में Supabase URL और publishable/anon key जोड़ें और `supabase/schema.sql` चलाएँ।</p><Link href="/" className="mt-5 inline-block underline">मुख्य वेबसाइट</Link></div></main>}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { PROBLEMS, PRODUCTS } from "@/lib/data";
 
 export async function generateStaticParams() {
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ problem: 
 export default async function ProblemPage({ params }: { params: Promise<{ problem: string }> }) {
   const { problem } = await params;
   const x = PROBLEMS.find((y) => y.slug === problem);
-  if (!x) return null;
+  if (!x) notFound();
   const matches = PRODUCTS.filter((p) => p.category === problem);
 
   return (

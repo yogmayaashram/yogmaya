@@ -8,7 +8,7 @@ export default function ContactPage() {
           <input type="text" placeholder="Your Name" className="w-full p-3 rounded-xl border border-ink/10 bg-cream outline-none focus:border-saffron" />
           <input type="email" placeholder="Email Address" className="w-full p-3 rounded-xl border border-ink/10 bg-cream outline-none focus:border-saffron" />
           <textarea placeholder="Message" rows={4} className="w-full p-3 rounded-xl border border-ink/10 bg-cream outline-none focus:border-saffron"></textarea>
-          <button type="button" className="w-full bg-maroon text-white py-3 rounded-xl font-medium">Send Message</button>
+          <p role="status" className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm leading-relaxed text-amber-900">यह संपर्क फॉर्म अभी संदेश भेजने की सेवा से जुड़ा नहीं है। वास्तविक संपर्क ईमेल/फोन सत्यापित होने के बाद फॉर्म सक्रिय किया जाएगा।</p><button type="button" disabled className="w-full cursor-not-allowed rounded-full bg-ink/20 px-5 py-3 text-ink/50">संदेश सेवा अभी उपलब्ध नहीं</button>
         </form>
         <Link href="/" className="block text-center mt-6 text-sm text-ink/40 hover:text-saffron">← Back to Home</Link>
       </div>

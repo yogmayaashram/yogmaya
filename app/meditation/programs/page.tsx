@@ -9,7 +9,7 @@ export default function ProgramsPage() {
             <div key={p} className="p-8 rounded-3xl bg-white border border-maroon/10 shadow-sm">
               <h3 className="text-xl font-serif text-maroon mb-2">{p}</h3>
               <p className="text-sm text-ink/60 mb-6">Deepen your practice with guided sessions.</p>
-              <button className="bg-maroon text-white px-6 py-2 rounded-full text-sm">Enroll Now</button>
+              <p className="text-sm text-ink/60">नामांकन जल्द उपलब्ध होगा</p>
             </div>
           ))}
         </div>

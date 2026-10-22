@@ -9,7 +9,7 @@ export default function PujaPage() {
           {["Satyanarayan Katha", "Mahamrityunjaya Jaap", "Griha Pravesh Puja", "Navratri Puja"].map((p) => (
             <div key={p} className="p-6 rounded-2xl bg-white border border-maroon/10 shadow-sm flex justify-between items-center">
               <h3 className="text-xl font-serif text-maroon">{p}</h3>
-              <button className="bg-saffron text-white px-6 py-2 rounded-full text-sm">Book Now</button>
+              <p className="rounded-full border border-amber-300 bg-amber-50 px-4 py-2 text-xs text-amber-900">ऑनलाइन बुकिंग जल्द उपलब्ध होगी</p>
             </div>
           ))}
         </div>

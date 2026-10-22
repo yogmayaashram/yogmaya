@@ -7,9 +7,9 @@ export default function DonatePage() {
         <p className="text-sm text-ink/60 mb-8">आपका हर दान आश्रम की सेवा को सशक्त बनाता है।</p>
         <div className="bg-cream p-6 rounded-2xl mb-6">
           <p className="text-sm font-medium text-ink/50 mb-1">UPI ID / Bank Details</p>
-          <p className="font-mono text-lg font-semibold text-maroon select-all">ashram@upi</p>
+          <p className="font-mono text-lg font-semibold text-maroon select-all">UPI / बैंक विवरण शीघ्र उपलब्ध होंगे</p>
         </div>
-        <button className="w-full bg-saffron text-white py-3 rounded-xl font-medium">Pay via UPI</button>
+        <p className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-left text-sm leading-relaxed text-amber-900">ऑनलाइन भुगतान अभी सक्रिय नहीं है। कृपया सत्यापित ट्रस्ट भुगतान विवरण प्रकाशित होने तक इस पेज से भुगतान न करें।</p>
         <Link href="/" className="inline-block mt-8 text-sm text-ink/40 hover:text-saffron">← Back to Home</Link>
       </div>
     </main>

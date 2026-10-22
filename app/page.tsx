@@ -30,14 +30,18 @@ export default function HomePage() {
           </Link>
           <nav className="hidden md:flex gap-8 text-sm font-medium text-white/80">
             <Link href="/puja" className="hover:text-gold transition">पूजा सेवा</Link>
+            <Link href="/live" className="hover:text-gold transition">लाइव आरती</Link>
+            <Link href="/booking" className="hover:text-gold transition">ऑनलाइन बुकिंग</Link>
+            <Link href="/membership/apply" className="hover:text-gold transition">सदस्यता</Link>
             <Link href="/pashushala" className="hover:text-gold transition">गौशाला</Link>
             <a href="https://ayurveda.yogmaya.net" className="hover:text-gold transition">आयुर्वेद</a>
             <a href="https://meditate.yogmaya.net" className="hover:text-gold transition">ध्यान केंद्र</a>
             <Link href="/about" className="hover:text-gold transition">हमारे बारे में</Link>
           </nav>
-          <Link href="/donate" className="hidden md:inline-flex bg-white text-maroon px-6 py-2.5 rounded-full font-semibold hover:bg-gold hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-            दान करें
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/auth/login" className="inline-flex rounded-full border border-white/40 px-4 py-2 text-xs font-semibold text-white hover:bg-white hover:text-maroon md:text-sm">सदस्य लॉगिन</Link>
+            <Link href="/donate" className="hidden md:inline-flex bg-white text-maroon px-6 py-2.5 rounded-full font-semibold hover:bg-gold hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">दान करें</Link>
+          </div>
         </div>
       </header>
 
@@ -128,7 +132,7 @@ export default function HomePage() {
                 </div>
                 <h4 className="text-2xl font-serif text-maroon mb-4">{x.t}</h4>
                 <p className="text-ink/70 leading-relaxed mb-6">{x.d}</p>
-                <Link href="#" className="inline-flex items-center gap-2 text-sm font-bold text-saffron group-hover:gap-3 transition-all">
+                <Link href="/puja" className="inline-flex items-center gap-2 text-sm font-bold text-saffron group-hover:gap-3 transition-all">
                   Learn More <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -241,6 +245,9 @@ export default function HomePage() {
               <li><Link href="/puja" className="hover:text-white transition">Puja Services</Link></li>
               <li><Link href="/pashushala" className="hover:text-white transition">Gau Shala</Link></li>
               <li><Link href="/donate" className="hover:text-white transition">Donate</Link></li>
+              <li><Link href="/auth/login" className="hover:text-white transition">Member Login</Link></li>
+              <li><Link href="/membership/apply" className="hover:text-white transition">Membership</Link></li>
+              <li><Link href="/live" className="hover:text-white transition">Live Aarti</Link></li>
             </ul>
           </div>
           

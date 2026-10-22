@@ -25,9 +25,9 @@ export default function MeditationHome() {
           <p className="mt-6 text-lg text-ink/70 leading-relaxed">
             शांति, संतुलन और आत्म-जागृति के लिए मार्गदर्शित ध्यान सत्र।
           </p>
-          <button className="mt-10 bg-maroon text-white px-8 py-3.5 rounded-full hover:bg-saffron transition">
-            Book a Session
-          </button>
+          <Link href="/meditation/programs" className="mt-10 inline-block bg-maroon text-white px-8 py-3.5 rounded-full hover:bg-saffron transition">
+            कार्यक्रम देखें
+          </Link>
         </div>
       </section>
 

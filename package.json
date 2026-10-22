@@ -28,5 +28,11 @@
     "autoprefixer": "^10.4.20",
     "@cloudflare/next-on-pages": "^1.13.6",
     "vercel": "^39.1.3"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "@types/react": "$@types/react",
+    "@types/react-dom": "$@types/react-dom"
   }
 }

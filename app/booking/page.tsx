@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createBooking } from "@/app/booking/actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+export const runtime = "edge";
+
 export default async function BookingPage({searchParams}:{searchParams:Promise<{error?:string}>}){
  const {error}=await searchParams; const supabase=await createSupabaseServerClient(); const {data:{user}}=supabase?await supabase.auth.getUser():{data:{user:null}};
  const errors:Record<string,string>={config:"Supabase सेटअप जरूरी है।",validation:"सही जानकारी दें और भविष्य का समय चुनें (कम-से-कम 30 मिनट बाद)।",submit:"बुकिंग सेव नहीं हुई। डेटाबेस स्कीमा और permissions जाँचें।"};

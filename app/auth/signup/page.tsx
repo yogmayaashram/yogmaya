@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { signUpAction } from "@/app/auth/actions";
+export const runtime = "edge";
+
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ error?: string; success?: string }> }) {
  const { error, success } = await searchParams;
  return <main className="min-h-screen bg-cream px-5 py-16"><div className="mx-auto max-w-lg rounded-3xl border border-maroon/10 bg-white p-8 shadow-xl"><p className="text-sm font-semibold tracking-widest text-saffron">YOG MAYA ASHRAM</p><h1 className="mt-3 text-4xl text-maroon">नया अकाउंट बनाएँ</h1><p className="mt-2 text-sm text-ink/60">रजिस्ट्रेशन से सामान्य सदस्य अकाउंट बनेगा। इससे ट्रस्ट पदाधिकारी के अधिकार नहीं मिलते।</p>

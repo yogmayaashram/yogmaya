@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { signOutAction } from "@/app/auth/actions";
+export const runtime = "edge";
+
 const labels: Record<string,string> = { super_admin:"मुख्य एडमिन", trustee:"ट्रस्टी / पदाधिकारी", membership_manager:"सदस्यता प्रबंधक", finance_manager:"वित्त प्रबंधक", puja_manager:"पूजा प्रबंधक", public_member:"सामान्य सदस्य" };
 export default async function DashboardPage() {
  const supabase = await createSupabaseServerClient();

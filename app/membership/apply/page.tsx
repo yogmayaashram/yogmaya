@@ -2,6 +2,8 @@ import Link from "next/link";
 import { applyMembership, applyTrustee } from "@/app/membership/actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+export const runtime = "edge";
+
 export default async function MembershipApplyPage({searchParams}:{searchParams:Promise<{error?:string}>}) {
  const {error}=await searchParams; const supabase=await createSupabaseServerClient();
  const {data:{user}}=supabase?await supabase.auth.getUser():{data:{user:null}};

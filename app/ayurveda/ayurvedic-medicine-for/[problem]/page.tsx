@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROBLEMS, PRODUCTS } from "@/lib/data";
 
+
 export async function generateStaticParams() {
   return PROBLEMS.map((x) => ({ problem: x.slug }));
 }

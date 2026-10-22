@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+export const runtime = "edge";
+
 const allowed=["super_admin","trustee","membership_manager","finance_manager","puja_manager"];
 export default async function AdminHome(){
  const supabase=await createSupabaseServerClient(); if(!supabase) return <Setup/>;

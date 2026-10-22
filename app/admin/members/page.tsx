@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { reviewMembership, reviewTrusteeApplication } from "@/app/admin/members/actions";
+export const runtime = "edge";
+
 const staff=["super_admin","trustee","membership_manager"];
 export default async function AdminMembers({searchParams}:{searchParams:Promise<{error?:string;success?:string}>}){const {error,success}=await searchParams;const s=await createSupabaseServerClient();if(!s)redirect("/admin");const {data:{user}}=await s.auth.getUser();if(!user)redirect("/auth/login");const {data:p}=await s.from("profiles").select("app_role,account_status").eq("id",user.id).maybeSingle();if(!p||!staff.includes(p.app_role)||p.account_status!=="active")redirect("/dashboard");
  const [{data:apps},{data:members},{data:people}]=await Promise.all([s.from("trustee_applications").select("id,user_id,full_name,phone,email,address,statement,review_status,payment_status,created_at").order("created_at",{ascending:false}).limit(50),s.from("memberships").select("id,user_id,membership_number,plan_code,status,created_at").order("created_at",{ascending:false}).limit(50),s.from("profiles").select("id,full_name,phone,app_role,account_status,created_at").order("created_at",{ascending:false}).limit(100)]);

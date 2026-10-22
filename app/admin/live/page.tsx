@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { saveLiveEvent,setLivePublished } from "@/app/admin/live/actions";
+export const runtime = "edge";
+
 const roles=["super_admin","trustee","puja_manager"];
 export default async function AdminLive({searchParams}:{searchParams:Promise<{error?:string;success?:string}>}){const {error,success}=await searchParams;const s=await createSupabaseServerClient();if(!s)redirect("/admin");const {data:{user}}=await s.auth.getUser();if(!user)redirect("/auth/login");const {data:p}=await s.from("profiles").select("app_role,account_status").eq("id",user.id).maybeSingle();if(!p||!roles.includes(p.app_role)||p.account_status!=="active")redirect("/dashboard");const {data:events}=await s.from("live_events").select("id,title,description,youtube_video_id,scheduled_at,event_status,is_published,created_at").order("scheduled_at",{ascending:false}).limit(50);
  return <main className="min-h-screen bg-cream px-4 py-8 md:px-8"><div className="mx-auto max-w-5xl"><Link href="/admin" className="text-sm text-maroon underline">← प्रशासन</Link><h1 className="mt-4 text-4xl text-maroon">लाइव आरती प्रबंधन</h1><p className="mt-2 text-sm text-ink/60">YouTube पर स्ट्रीम अलग से शुरू करें। यहाँ उसका वीडियो ID दर्ज करके वेबसाइट पर कार्यक्रम प्रकाशित किया जा सकता है।</p>{error&&<p role="alert" className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-800">{error==="validation"?"शीर्षक और सही 11-अक्षर YouTube वीडियो ID आवश्यक है।":"सहेजने में त्रुटि हुई। डेटाबेस स्कीमा और अनुमति जाँचें।"}</p>}{success&&<p role="status" className="mt-4 rounded-xl bg-green-50 p-3 text-sm text-green-800">कार्यक्रम अपडेट हो गया।</p>}

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { signInAction } from "@/app/auth/actions";
+export const runtime = "edge";
+
 
 const messages: Record<string, string> = {
   config: "Supabase configuration missing. Follow the setup guide first.",

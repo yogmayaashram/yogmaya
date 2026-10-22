@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+export const runtime = "edge";
+
 export const metadata: Metadata = { title: "लाइव आरती एवं पूजन | Yog Maya Ashram", description: "योग माया आश्रम की प्रकाशित लाइव आरती और पूजन प्रसारण देखें।", alternates: { canonical: "https://yogmaya.net/live" } };
 function validVideoId(value: unknown): value is string { return typeof value === "string" && /^[A-Za-z0-9_-]{11}$/.test(value); }
 export default async function LivePage() {
